@@ -54,6 +54,7 @@
 
 (setq visible-bell t)
 (column-number-mode)
+(global-display-line-numbers-mode t)
 
 (set-face-attribute 'default nil :font "Fira Code Retina")
 ;; https://github.com/mickeynp/ligature.el
