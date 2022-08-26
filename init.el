@@ -68,49 +68,6 @@
   (which-key-mode)
   (setq which-key-idle-delay .4))
 
-(use-package ivy
-  :config
-  (ivy-mode 1))
-
-(use-package projectile
-  :config (projectile-mode)
-  :custom ((projectile-completion-system 'ivy))
-  :bind-keymap
-  ("C-c p" . projectile-command-map)
-  :init
-  (when (file-directory-p "~/clones")
-    (setq projectile-project-search-path '("~/clones")))
-  (setq projectile-switch-project-action #'projectile-dired))
-(use-package projectile-ripgrep)
-
-(use-package magit
-  :commands magit-status)
-	       
-(use-package lsp-mode
-  :commands (lsp lsp-deferred)
-  :init
-  (setq lsp-keymap-prefix "C-c l")
-  :config
-  (lsp-enable-which-key-integration t))
-
-(use-package typescript-mode
-  :mode "\\.ts\\'"
-  :hook (typescript-mode . lsp-deferred)
-  :config
-  (setq typescript-indent-level 2))
-
-(use-package company
-  :after lsp-mode
-  :hook (lsp-mode . company-mode))
-
-(use-package lsp-ui
-  :hook (lsp-mode . lsp-ui-mode)
-  :custom
-  (lsp-ui-doc-position 'bottom))
-
-(use-package lsp-treemacs
-  :after lsp)
-
 ;; Typescript development
 (use-package js-mode
   :mode "\\.[jt]sx?\\'")
