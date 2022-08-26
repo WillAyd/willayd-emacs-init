@@ -19,24 +19,6 @@
 (add-hook 'c++-mode-hook 'google-set-c-style)
 (add-hook 'c++-mode-hook 'google-make-newline-indent)
 
-;;(use-package web-mode
-;; :mode "\\.js\\'"
-;;  :config
-;;  (setq web-mode-enable-auto-expanding t))
-;;(use-package prettier-js-mode
-;;  :init
-;;  (setq js-indent-level 2)
-;;  :hook (web-mode js-mode))
-;;(use-package company-mode
-;;  :hook (js-mode))
-;;;;(require 'lsp)
-;;(use-package lsp-mode
-;;  :commands (lsp lsp-deferred)
-;;  :hook (js-mode)
-;;  :init
-;;  (setq lsp-keymap-prefix "C-c l"))
-;;(use-package emmet-mode
-;;  :hook (js-mode))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -128,3 +110,14 @@
 
 (use-package lsp-treemacs
   :after lsp)
+
+;; Typescript development
+(use-package js-mode
+  :mode "\\.[jt]sx?\\'")
+
+(eval-after-load 'js-mode
+  (progn
+    (add-hook 'js-mode-hook #'add-node-modules-path)
+    (add-hook 'js-mode-hook #'web-mode-hook
+    (add-hook 'js-mode-hook #'emmet-mode)
+    (setq js-indent-level 2)))
