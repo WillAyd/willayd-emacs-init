@@ -34,6 +34,7 @@
 (tooltip-mode -1)
 (menu-bar-mode -1)
 
+(setq-default indent-tabs-mode nil)
 (setq visible-bell t)
 (column-number-mode)
 (global-display-line-numbers-mode t)
