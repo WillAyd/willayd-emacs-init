@@ -7,8 +7,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(lsp-treemacs projectile-ripgrep ripgrep typescript-mode magit helpful ivy which-key doom-themes clang-format treemacs emmet-mode lsp-ui lsp-mode company web-mode js2-mode prettier-js google-c-style)))
-
+ '(package-selected-packages
+   '(rust-mode lsp-mode web-mode-edit-element add-node-modules-path prettier emmet-mode prettier-js web-mode typescript-mode cmake-mode which-key use-package doom-themes)))
 (setq auto-save-file-name-transforms
       `((".*" "~/.emacs-saves/" t)))
 (setq backup-directory-alist `(("." . "~/.emacs-saves")))
@@ -79,3 +79,10 @@
     (add-hook 'js-mode-hook #'web-mode-hook
     (add-hook 'js-mode-hook #'emmet-mode)
     (setq js-indent-level 2)))
+                 
+(use-package rust-mode
+  :init (add-to-list 'exec-path "~/.cargo/bin")
+  :hook prettify-symbols
+  :config
+  (setq indent-tabs-mode nil)
+  (setq rust-format-on-save t))
