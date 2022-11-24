@@ -79,7 +79,8 @@
   ("C-c p" . projectile-command-map)
   :init
   (when (file-directory-p "~/clones")
-    (setq projectile-project-search-path '("~/clones"))))
+    (setq projectile-project-search-path '("~/clones")))
+  (setq projectile-switch-project-action #'projectile-dired))
 
 (use-package lsp
   :commands (lsp lsp-deferred)
