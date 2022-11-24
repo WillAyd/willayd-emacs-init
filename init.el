@@ -8,7 +8,7 @@
  ;; If there is more than one, they won't work right.
  '(ispell-dictionary nil)
  '(package-selected-packages
-   '(conda transpose-frame lsp-pyright ripgrep projectile exec-path-from-shell company lsp-ui rust-mode lsp-mode web-mode-edit-element add-node-modules-path prettier emmet-mode prettier-js web-mode typescript-mode cmake-mode which-key use-package doom-themes)))
+   '(clang-format ivy magit conda transpose-frame lsp-pyright ripgrep projectile exec-path-from-shell company lsp-ui rust-mode lsp-mode web-mode-edit-element add-node-modules-path prettier emmet-mode prettier-js web-mode typescript-mode cmake-mode which-key use-package doom-themes)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -59,7 +59,15 @@
   (setq indent-tabs-mode nil)
   (setq rust-format-on-save t))
 
+(use-package ivy
+  :diminish
+  :config
+  (ivy-mode 1))
+
 (use-package projectile
+  :diminish projectile-mode
+  :config (projectile-mode)
+  :custom ((projectile-completion-system 'ivy))
   :bind-keymap
   ("C-c p" . projectile-command-map)
   :init
@@ -68,18 +76,21 @@
 
 (use-package lsp
   :commands (lsp lsp-deferred)
-  :hook (c++-mode))
+  :init
+  (setq lsp-keymap-prefix "C-c l")  
+  :hook (c++-mode c-mode))
 
 (add-to-list 'auto-mode-alist '("\\.py*" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.pxi*" . python-mode))
 (require 'conda)
 ;; if you want auto-activation (see below for details), include:
-(conda-env-autoactivate-mode t)
+;;(conda-env-autoactivate-mode t)
 ;; if you want to automatically activate a conda environment on the opening of a file:
 
 (defun my-conda-hook()
-  (when (and (stringp buffer-file-name)
-             (string-match "\\.py*\\'" buffer-file-name))
+  (when (and (and(stringp buffer-file-name)
+                 (string-match "\\.py*\\'" buffer-file-name))
+             (not (bound-and-true-p conda-env-current-name)))
     (conda-env-activate-for-buffer)))
 
 (add-hook 'find-file-hook 'my-conda-hook)
@@ -87,3 +98,10 @@
 (use-package lsp-pyright
   :hook (python-mode . (lambda ()
                          (lsp-deferred))))
+
+(defun my-cpp-setup ()
+  (c-set-offset 'innamespace [0]))
+(add-hook 'c++-mode-hook 'my-cpp-setup)
+
+;;(use-package clang-format
+;;  :hook c++-mode)
