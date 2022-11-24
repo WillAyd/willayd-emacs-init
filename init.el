@@ -1,3 +1,4 @@
+
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
@@ -8,7 +9,7 @@
  ;; If there is more than one, they won't work right.
  '(ispell-dictionary nil)
  '(package-selected-packages
-   '(clang-format ivy magit conda transpose-frame lsp-pyright ripgrep projectile exec-path-from-shell company lsp-ui rust-mode lsp-mode web-mode-edit-element add-node-modules-path prettier emmet-mode prettier-js web-mode typescript-mode cmake-mode which-key use-package doom-themes)))
+   '(lsp-pyright clang-format ivy magit conda transpose-frame ripgrep projectile exec-path-from-shell company lsp-ui rust-mode lsp-mode web-mode-edit-element add-node-modules-path prettier emmet-mode prettier-js web-mode typescript-mode cmake-mode which-key use-package doom-themes)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -40,7 +41,10 @@
 (use-package doom-themes
   :init (load-theme 'doom-palenight t))  ;; also like doom-gruvbox
 
-(use-package which-key)
+(use-package which-key
+  :config
+  (which-key-mode))
+
 (use-package js-mode
   :mode "\\.[jt]sx?\\'"
   :config
