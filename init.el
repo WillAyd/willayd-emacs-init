@@ -1,4 +1,3 @@
-
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
@@ -9,7 +8,7 @@
  ;; If there is more than one, they won't work right.
  '(ispell-dictionary nil)
  '(package-selected-packages
-   '(lsp-pyright clang-format ivy magit conda transpose-frame ripgrep projectile exec-path-from-shell company lsp-ui rust-mode lsp-mode web-mode-edit-element add-node-modules-path prettier emmet-mode prettier-js web-mode typescript-mode cmake-mode which-key use-package doom-themes)))
+   '(command-log-mode lsp-pyright clang-format ivy magit conda transpose-frame ripgrep projectile exec-path-from-shell company lsp-ui rust-mode lsp-mode web-mode-edit-element add-node-modules-path prettier emmet-mode prettier-js web-mode typescript-mode cmake-mode which-key use-package doom-themes)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -32,6 +31,9 @@
 (tool-bar-mode -1)
 (tooltip-mode -1)
 (menu-bar-mode -1)
+
+(use-package command-log-mode
+  :commands command-log-mode)
 
 (setq-default indent-tabs-mode nil)
 (setq visible-bell t)
