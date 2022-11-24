@@ -33,7 +33,8 @@
 (menu-bar-mode -1)
 
 (use-package command-log-mode
-  :commands command-log-mode)
+  :commands command-log-mode
+  :hook prog-mode)
 
 (setq-default indent-tabs-mode nil)
 (setq visible-bell t)
