@@ -8,7 +8,7 @@
  ;; If there is more than one, they won't work right.
  '(ispell-dictionary nil)
  '(package-selected-packages
-   '(command-log-mode lsp-pyright clang-format ivy magit conda transpose-frame ripgrep projectile exec-path-from-shell company lsp-ui rust-mode lsp-mode web-mode-edit-element add-node-modules-path prettier emmet-mode prettier-js web-mode typescript-mode cmake-mode which-key use-package doom-themes)))
+   '(lsp-treemacs command-log-mode lsp-pyright clang-format ivy magit conda transpose-frame ripgrep projectile exec-path-from-shell company lsp-ui rust-mode lsp-mode web-mode-edit-element add-node-modules-path prettier emmet-mode prettier-js web-mode typescript-mode cmake-mode which-key use-package doom-themes)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -70,6 +70,14 @@
   :diminish
   :config
   (ivy-mode 1))
+
+(use-package company
+  :after lsp-mode
+  :hook (lsp-mode . company-mode)
+  :bind (:map company-active-map
+              ("<tab>" . company-complete-selection))
+  (:map lsp-mode-map
+        ("<tab>" . company-indent-or-complete-common)))
 
 (use-package projectile
   :diminish projectile-mode
