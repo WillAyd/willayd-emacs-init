@@ -94,6 +94,7 @@
   :commands (lsp lsp-deferred)
   :init
   (setq lsp-keymap-prefix "C-c l")  
+  (setq lsp-clients-clangd-args '("--header-insertion-decorators=0" "--limit-references=0" "--log=verbose"))
   :hook (c++-mode c-mode))
 
 (add-to-list 'auto-mode-alist '("\\.py*" . python-mode))
