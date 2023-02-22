@@ -112,9 +112,14 @@
 
 (add-hook 'find-file-hook 'my-conda-hook)
 
+(defun my-lsp-hook()
+     (when (or (string-match "\\.pyx\\'" buffer-file-name)
+               (string-match "\\.pxd\\'" buffer-file-name))
+       (setq lsp-diagnostics-provider :none))
+     (lsp-deferred))
+
 (use-package lsp-pyright
-  :hook (python-mode . (lambda ()
-                         (lsp-deferred))))
+  :hook (python-mode . my-lsp-hook))
 
 (defun my-cpp-setup ()
   (c-set-offset 'innamespace [0]))
